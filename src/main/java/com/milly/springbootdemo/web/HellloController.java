@@ -11,7 +11,7 @@ import java.util.Map;
 
 //@Controller
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("api/v2")
 public class HellloController {
 //
 //    @Autowired
