@@ -1,6 +1,11 @@
 spring:
   profiles:
     active: dev
+  thymeleaf:
+    mode: HTML
+  devtools:
+    restart:
+      trigger-file: .trigger
 book:
     name: networking world
     author: shao

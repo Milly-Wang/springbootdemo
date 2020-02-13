@@ -3,6 +3,10 @@ package com.milly.springbootdemo.service;
 import com.milly.springbootdemo.domain.Book;
 import com.milly.springbootdemo.domain.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,14 +24,30 @@ public class BookService {
         return bookRepository.findAll();
     }
 
+    // find by page
+    public Page<Book> findAllByPage(Pageable pageable) {
+       // Sort sort = new Sort(Sort.Direction.DESC, "id");
+        //Pageable pageable = new PageRequest(1,5,  Sort.unsorted());
+        return bookRepository.findAll(pageable);
+    }
+
+
     //  add one book
     public Book save(Book book) {
         return bookRepository.save(book);
 
     }
     //  find one book
-    public Optional<Book> findOne(long id) {
-        return bookRepository.findById(id);
+//    public Optional<Book> findOne(long id) {
+//        return bookRepository.findById(id);
+//    }
+    public Book findOne(long id) {
+        Optional<Book> o = bookRepository.findById(id);
+        Book book = new Book();
+        if (o.isPresent()) {
+            book = bookRepository.findById(id).get();
+        }
+        return book;
     }
 
     //  delete one book

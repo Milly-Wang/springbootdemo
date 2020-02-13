@@ -3,6 +3,8 @@ package com.milly.springbootdemo.web;
 import com.milly.springbootdemo.domain.Book;
 import com.milly.springbootdemo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +22,11 @@ public class BookApp {
     public List<Book> getAll() {
         return bookService.findAll();
     }
+//    public Page<Book> getAll(@RequestParam int page, @RequestParam int size) {
+//        Sort sort = new Sort(Sort.Direction.DESC, "id");
+//        return bookService.findAllByPage();
+//       //return bookService.findAll();
+//    }
 
 
     //add one book
@@ -41,10 +48,10 @@ public class BookApp {
 //    }
 
     //get one book
-    @GetMapping("/books/{id}")
-    public Optional<Book> getOne(@PathVariable long id) {
-        return bookService.findOne(id);
-    }
+//    @GetMapping("/books/{id}")
+//    public Book getOne(@PathVariable long id) {
+//        return bookService.findOne(id);
+//    }
 
     //update one book
     @PutMapping("/books")
