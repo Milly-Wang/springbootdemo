@@ -1,13 +1,16 @@
 package com.milly.springbootdemo.web;
 
 import com.milly.springbootdemo.domain.Book;
+import com.milly.springbootdemo.exception.BookNotFound;
 import com.milly.springbootdemo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,8 +33,10 @@ public class BookController {
     @GetMapping("/books/{id}")
     public String detail(@PathVariable long id, Model model) {
         Book book = bookService.findOne(id);
+        System.out.println("book is not null");
         if(book == null) {
-            book = new Book();
+            System.out.println("book is null");
+            throw new BookNotFound("Book List does not exist");
         }
         model.addAttribute("book",book);
         return "book";
@@ -69,4 +74,8 @@ public class BookController {
         return "redirect:/books";
     }
 
+    //Exception handler in controller
+    public ModelAndView handleException(HttpServletRequest request, Exception e) {
+
+    }
 }

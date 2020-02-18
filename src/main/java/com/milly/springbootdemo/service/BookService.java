@@ -46,8 +46,9 @@ public class BookService {
         Book book = new Book();
         if (o.isPresent()) {
             book = bookRepository.findById(id).get();
+            return book;
         }
-        return book;
+        return null;
     }
 
     //  delete one book
